@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, BarChart3, Users, BookOpen, LogOut, RefreshCw, Trash2, Unlock, Search, Settings } from "lucide-react";
+import { Plus, BarChart3, Users, BookOpen, LogOut, RefreshCw, Trash2, Unlock, Search, Settings, Brain } from "lucide-react";
 
 interface SystemStats {
   totalUsers: number;
@@ -74,6 +74,16 @@ export default function TeacherPage() {
     queryFn: async () => {
       const res = await fetch("/api/admin/users");
       if (!res.ok) throw new Error("Failed to fetch users");
+      return res.json();
+    },
+  });
+
+  const { data: behaviorPatterns, isLoading: behaviorLoading } = useQuery<any>({
+    queryKey: ["/api/admin/behavior-patterns"],
+    enabled: user?.role === "admin",
+    queryFn: async () => {
+      const res = await fetch("/api/admin/behavior-patterns");
+      if (!res.ok) throw new Error("Failed to fetch behavior patterns");
       return res.json();
     },
   });
@@ -221,6 +231,10 @@ export default function TeacherPage() {
                 <TabsTrigger value="admin-users">
                   <Users className="w-4 h-4 mr-2" />
                   Users
+                </TabsTrigger>
+                <TabsTrigger value="behavior-patterns">
+                  <Brain className="w-4 h-4 mr-2" />
+                  Behavior Patterns
                 </TabsTrigger>
               </>
             )}
@@ -521,6 +535,146 @@ export default function TeacherPage() {
                         </tbody>
                       </table>
                     </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              {/* Behavior Patterns Tab */}
+              <TabsContent value="behavior-patterns" className="space-y-6 mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {/* Learning Time Preferences */}
+                  <Card className="bg-[#1a1220]/60 border-[#3b2a45]">
+                    <CardHeader>
+                      <CardTitle className="text-tower-gold flex items-center gap-2">
+                        <Brain className="w-5 h-5" />
+                        Learning Time Patterns
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      {behaviorLoading ? (
+                        <p className="text-muted-foreground">Loading patterns...</p>
+                      ) : (
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Morning Learners</span>
+                            <span className="text-tower-gold font-semibold">
+                              {behaviorPatterns?.morningLearners || 0}%
+                            </span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Evening Learners</span>
+                            <span className="text-tower-gold font-semibold">
+                              {behaviorPatterns?.eveningLearners || 0}%
+                            </span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Night Owls</span>
+                            <span className="text-tower-gold font-semibold">
+                              {behaviorPatterns?.nightLearners || 0}%
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+
+                  {/* Attention Span Metrics */}
+                  <Card className="bg-[#1a1220]/60 border-[#3b2a45]">
+                    <CardHeader>
+                      <CardTitle className="text-tower-gold flex items-center gap-2">
+                        <BarChart3 className="w-5 h-5" />
+                        Attention Patterns
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      {behaviorLoading ? (
+                        <p className="text-muted-foreground">Loading patterns...</p>
+                      ) : (
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Avg Session Time</span>
+                            <span className="text-tower-gold font-semibold">
+                              {behaviorPatterns?.avgSessionTime || 0} min
+                            </span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Distraction Rate</span>
+                            <span className="text-tower-gold font-semibold">
+                              {behaviorPatterns?.distractionRate || 0}%
+                            </span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Focus Score</span>
+                            <span className="text-tower-gold font-semibold">
+                              {behaviorPatterns?.focusScore || 0}/100
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+
+                  {/* Error Patterns */}
+                  <Card className="bg-[#1a1220]/60 border-[#3b2a45]">
+                    <CardHeader>
+                      <CardTitle className="text-tower-gold flex items-center gap-2">
+                        <BookOpen className="w-5 h-5" />
+                        Learning Challenges
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      {behaviorLoading ? (
+                        <p className="text-muted-foreground">Loading patterns...</p>
+                      ) : (
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Error Rate</span>
+                            <span className="text-tower-gold font-semibold">
+                              {behaviorPatterns?.errorRate || 0}%
+                            </span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Retry Frequency</span>
+                            <span className="text-tower-gold font-semibold">
+                              {behaviorPatterns?.retryFrequency || 0}
+                            </span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm">Improvement Rate</span>
+                            <span className="text-tower-gold font-semibold">
+                              {behaviorPatterns?.improvementRate || 0}%
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Detailed Behavior Analytics */}
+                <Card className="bg-[#1a1220]/60 border-[#3b2a45]">
+                  <CardHeader>
+                    <CardTitle className="text-tower-gold">Student Behavior Insights</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {behaviorLoading ? (
+                      <p className="text-muted-foreground">Loading detailed analytics...</p>
+                    ) : behaviorPatterns?.insights ? (
+                      <div className="space-y-4">
+                        {behaviorPatterns.insights.map((insight: any, index: number) => (
+                          <div key={index} className="border-l-4 border-tower-gold pl-4 py-2">
+                            <h4 className="font-semibold text-tower-gold mb-1">{insight.category}</h4>
+                            <p className="text-sm text-muted-foreground mb-2">{insight.description}</p>
+                            <div className="flex gap-4 text-xs">
+                              <span>Trend: <span className="text-tower-gold">{insight.trend}</span></span>
+                              <span>Impact: <span className="text-tower-gold">{insight.impact}</span></span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-muted-foreground">No behavior insights available yet.</p>
+                    )}
                   </CardContent>
                 </Card>
               </TabsContent>

@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { FLOOR_NAMES } from "@shared/schema";
 import type { Lecture, QuizQuestion } from "@shared/schema";
+import PersonalizedLearning from "@/components/PersonalizedLearning";
 
 export default function LecturePage() {
   const { user, updateUser } = useAuth();
@@ -57,6 +58,10 @@ export default function LecturePage() {
 
   const isLoading = lectureLoading || questionsLoading;
   const error = lectureError;
+
+  // Check if user has completed all lectures on current floor
+  const lecturesCompletedOnFloor = (user?.lecturesCompleted || 0) % 10;
+  const hasCompletedFloorLectures = lecturesCompletedOnFloor === 0 && (user?.lecturesCompleted || 0) > 0;
 
   // Timer for quiz
   useEffect(() => {
@@ -192,21 +197,20 @@ export default function LecturePage() {
     );
   }
 
-  if (error || !data) {
+  if (error || !data || hasCompletedFloorLectures) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Card className="max-w-md">
-          <CardContent className="p-8 text-center">
-            <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <h2 className="font-cinzel text-2xl mb-2">No Lecture Available</h2>
-            <p className="text-muted-foreground mb-6">
-              You've completed all available lectures on this floor!
-            </p>
-            <Link href="/dashboard">
-              <Button>Return to Dashboard</Button>
-            </Link>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen bg-background">
+        <div className="max-w-4xl mx-auto px-6 py-8">
+          <PersonalizedLearning
+            userId={user?.id || ""}
+            currentFloor={user?.currentFloor || 1}
+            completedLectures={user?.lecturesCompleted || 0}
+            onVideoSelect={(video) => {
+              // Open video in new tab or embedded player
+              window.open(video.url, '_blank');
+            }}
+          />
+        </div>
       </div>
     );
   }

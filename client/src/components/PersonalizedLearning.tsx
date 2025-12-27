@@ -5,10 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Sparkles, Play, Heart, BookOpen, RefreshCw, ArrowLeft, CheckCircle, Clock, Target, Trophy, Brain, Zap, Star, Users, Award, TrendingUp, Lightbulb, CheckSquare } from "lucide-react";
+import { Sparkles, Play, Heart, BookOpen, RefreshCw, ArrowLeft, CheckCircle, Clock, Target, Trophy, Brain, Zap, Star, Users, Award, TrendingUp, Lightbulb, CheckSquare, Bot, MessageCircle } from "lucide-react";
 import { Link } from "wouter";
 import InteractiveVideoPlayer from "./InteractiveVideoPlayer";
 import HobbyBasedQuizGenerator from "./HobbyBasedQuizGenerator";
+import InteractiveContentPredictor from "./InteractiveContentPredictor";
+import AIReadingContentCreator from "./AIReadingContentCreator";
 
 interface Hobby {
   id: string;
@@ -139,6 +141,9 @@ export default function PersonalizedLearning({
   const [showVideoPlayer, setShowVideoPlayer] = useState(false);
   const [currentQuizVideo, setCurrentQuizVideo] = useState<LearningVideo | null>(null);
   const [showQuiz, setShowQuiz] = useState(false);
+  const [useInteractivePredictor, setUseInteractivePredictor] = useState(false);
+  const [predictedVideos, setPredictedVideos] = useState<LearningVideo[]>([]);
+  const [showAIReadingCreator, setShowAIReadingCreator] = useState(false);
 
   // Comprehensive video database with mood-based content
   const mockVideos: LearningVideo[] = [
@@ -520,6 +525,11 @@ export default function PersonalizedLearning({
     setCurrentQuizVideo(null);
   };
 
+  const handleContentPredicted = (videos: LearningVideo[], profile: any) => {
+    setPredictedVideos(videos);
+    setRecommendedVideos(videos);
+  };
+
   if (showQuiz && currentQuizVideo) {
     return (
       <div className="space-y-6">
@@ -600,19 +610,120 @@ export default function PersonalizedLearning({
         </CardHeader>
       </Card>
 
-      {/* Hobby Selection */}
+      {/* Mode Selection */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Heart className="h-5 w-5 text-red-500" />
-            What are your interests?
+            <Sparkles className="h-5 w-5 text-primary" />
+            Choose Your Learning Mode
           </CardTitle>
           <p className="text-sm text-muted-foreground">
-            Select your hobbies to get personalized learning recommendations
+            Select how you'd like to discover personalized content
           </p>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <button
+              onClick={() => {
+                setUseInteractivePredictor(false);
+                setShowAIReadingCreator(false);
+              }}
+              className={`p-4 rounded-lg border-2 transition-all ${
+                !useInteractivePredictor && !showAIReadingCreator
+                  ? "border-primary bg-primary/10"
+                  : "border-muted hover:border-primary/50"
+              }`}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <Heart className="h-6 w-6 text-red-500" />
+                <div className="text-left">
+                  <div className="font-semibold">Quick Selection</div>
+                  <div className="text-sm text-muted-foreground">Choose hobbies manually</div>
+                </div>
+              </div>
+              <p className="text-sm text-left">
+                Select your interests from predefined categories and get instant recommendations.
+              </p>
+            </button>
+
+            <button
+              onClick={() => setUseInteractivePredictor(true)}
+              className={`p-4 rounded-lg border-2 transition-all ${
+                useInteractivePredictor
+                  ? "border-primary bg-primary/10"
+                  : "border-muted hover:border-primary/50"
+              }`}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <Bot className="h-6 w-6 text-primary" />
+                <div className="text-left">
+                  <div className="font-semibold">AI Conversation</div>
+                  <div className="text-sm text-muted-foreground">Interactive discovery</div>
+                </div>
+              </div>
+              <p className="text-sm text-left">
+                Chat with AI to understand your learning style and get highly personalized content.
+              </p>
+            </button>
+
+            <button
+              onClick={() => {
+                setUseInteractivePredictor(false);
+                setShowAIReadingCreator(true);
+              }}
+              className={`p-4 rounded-lg border-2 transition-all hover:scale-105 ${
+                showAIReadingCreator
+                  ? "border-primary bg-primary/10"
+                  : "border-muted hover:border-primary/50"
+              }`}
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <BookOpen className="h-6 w-6 text-blue-500" />
+                <div className="text-left">
+                  <div className="font-semibold">AI Reading & Writing</div>
+                  <div className="text-sm text-muted-foreground">Conversational assistant</div>
+                </div>
+              </div>
+              <p className="text-sm text-left">
+                Chat with AI to analyze text, create summaries, generate questions, and make content.
+              </p>
+            </button>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Interactive Content Predictor */}
+      {useInteractivePredictor && (
+        <InteractiveContentPredictor
+          onContentPredicted={handleContentPredicted}
+          userMood={userMood}
+        />
+      )}
+
+      {/* AI Reading & Content Creator */}
+      {showAIReadingCreator && (
+        <AIReadingContentCreator
+          onContentGenerated={(content) => {
+            console.log('Content generated:', content);
+            // Could integrate with the learning system here
+          }}
+        />
+      )}
+
+      {/* Traditional Hobby Selection */}
+      {!useInteractivePredictor && !showAIReadingCreator && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Heart className="h-5 w-5 text-red-500" />
+              What are your interests?
+            </CardTitle>
+            <p className="text-sm text-muted-foreground">
+              Select your hobbies to get personalized learning recommendations
+            </p>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
             {hobbies.map((hobby) => (
               <button
                 key={hobby.id}
@@ -675,10 +786,11 @@ export default function PersonalizedLearning({
               )}
             </Button>
           </div>
-        </CardContent>
-      </Card>
+            </CardContent>
+          </Card>
+        )}
 
-      {/* Video Recommendations */}
+        {/* Video Recommendations */}
       {recommendedVideos.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
