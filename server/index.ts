@@ -1,11 +1,18 @@
 import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
+import cors from "cors";
 import { registerRoutes } from "./routes.ts";
 import { serveStatic } from "./static.ts";
 import { createServer } from "http";
 
 const app = express();
 const httpServer = createServer(app);
+
+// Enable CORS for all routes
+app.use(cors({
+  origin: true, // Allow all origins
+  credentials: true
+}));
 
 // Global error handlers to prevent process exit
 process.on("uncaughtException", (err) => {
