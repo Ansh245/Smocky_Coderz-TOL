@@ -1064,8 +1064,10 @@ export async function registerRoutes(
   // ===== END POWER CONTROLS =====
 
   // ============ WEBSOCKET SERVER FOR BATTLES ============
-  
-  const wss = new WebSocketServer({ server: httpServer, path: "/ws" });
+
+  // Only set up WebSocket server in non-Vercel environments
+  if (!process.env.VERCEL) {
+    const wss = new WebSocketServer({ server: httpServer, path: "/ws" });
 
   wss.on("connection", (ws: WebSocket) => {
     let odId = "";
@@ -1314,6 +1316,7 @@ export async function registerRoutes(
       console.error("WebSocket error:", error);
     });
   });
+  } // Close the VERCEL check
 
   return httpServer;
 }

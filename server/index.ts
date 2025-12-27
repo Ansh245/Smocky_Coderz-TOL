@@ -98,12 +98,15 @@ app.use((req, res, next) => {
     await setupVite(httpServer, app);
   }
 
-  // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
+// For Vercel serverless deployment, export the app
+// For local development, start the server
+if (process.env.VERCEL) {
+  // Export for Vercel serverless
+  module.exports = app;
+} else {
+  // Local development server
   const port = parseInt(process.env.PORT || "5000", 10);
-  
+
   httpServer.on("error", (err) => {
     console.error("HTTP server error:", err);
   });
@@ -129,4 +132,5 @@ app.use((req, res, next) => {
   httpServer.on("close", () => {
     log("Server closed");
   });
+}
 })();

@@ -1,5 +1,7 @@
 // API configuration for different environments
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+// In production (Vercel), use relative URLs since frontend and backend are on same domain
+// In development, use localhost:5000
+const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '' : 'http://localhost:5000');
 
 export const API_URL = API_BASE_URL;
 
