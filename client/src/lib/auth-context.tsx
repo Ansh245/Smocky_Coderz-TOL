@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
 import type { User } from "@shared/schema";
+import { buildApiUrl } from "./api";
 
 interface AuthContextType {
   user: User | null;
@@ -39,8 +40,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         : { email, password };
       
       console.log(`[Auth] ${isSignUp ? "Register" : "Login"} attempt to ${endpoint}`, body);
-      
-      const response = await fetch(endpoint, {
+
+      const response = await fetch(buildApiUrl(endpoint), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
