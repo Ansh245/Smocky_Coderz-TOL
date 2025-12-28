@@ -102,7 +102,7 @@ app.use((req, res, next) => {
 // For local development, start the server
 if (process.env.VERCEL) {
   // Export for Vercel serverless
-  module.exports = app;
+  export default app;
 } else {
   // Local development server
   const port = parseInt(process.env.PORT || "5000", 10);
