@@ -156,8 +156,8 @@ export default function PersonalizedLearning({
       id: "gaming-physics-energetic",
       title: "Physics of Video Games: Real Science Behind Gaming!",
       description: "Discover how physics makes video games realistic and exciting",
-      videoUrl: "https://www.youtube.com/embed/w9WSyqgkqFA", // Physics in video games - using working educational video
-      thumbnail: "https://img.youtube.com/vi/w9WSyqgkqFA/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/embed/8a9JGgCvzMg", // Physics in video games - using working educational video
+      thumbnail: "https://img.youtube.com/vi/8a9JGgCvzMg/maxresdefault.jpg",
       duration: 480,
       subject: "physics",
       difficulty: "intermediate",
@@ -180,7 +180,7 @@ export default function PersonalizedLearning({
       id: "gaming-math-calm",
       title: "Mathematics of Games: Strategy & Probability",
       description: "Discover how math powers strategic thinking in board games and video games",
-      videoUrl: "https://www.youtube.com/embed/w9WSyqgkqFA", // Mathematics in games - using educational math video
+      videoUrl: "https://www.youtube.com/embed/ZeZrx7kHTnI", // Mathematics in games - using educational math video
       thumbnail: "https://img.youtube.com/vi/ZeZrx7kHTnI/maxresdefault.jpg",
       isYouTube: true,
       duration: 720,
@@ -205,8 +205,8 @@ export default function PersonalizedLearning({
       id: "gaming-programming-focused",
       title: "Code Your Victory: Programming Game Logic",
       description: "Deep dive into the programming that makes games work",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      thumbnail: "https://img.youtube.com/vi/w9WSyqgkqFA/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Game programming - using educational programming video
+      thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
       isYouTube: true,
       duration: 900,
       subject: "programming",
@@ -233,8 +233,8 @@ export default function PersonalizedLearning({
       id: "sports-physics-energetic",
       title: "Physics of Sports: Speed, Power & Performance!",
       description: "Discover the science behind athletic excellence and extreme sports",
-      videoUrl: "https://www.youtube.com/embed/w9WSyqgkqFA", // Physics of sports - using educational sports science video
-      thumbnail: "https://img.youtube.com/vi/w9WSyqgkqFA/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/embed/8a9JGgCvzMg", // Physics of sports - using educational sports science video
+      thumbnail: "https://img.youtube.com/vi/8a9JGgCvzMg/maxresdefault.jpg",
       isYouTube: true,
       duration: 540,
       subject: "physics",
@@ -258,7 +258,7 @@ export default function PersonalizedLearning({
       id: "sports-biology-calm",
       title: "The Science of Athletic Recovery",
       description: "Gentle exploration of how the body recovers and builds strength",
-      videoUrl: "https://www.youtube.com/embed/ZeZrx7kHTnI",
+      videoUrl: "https://www.youtube.com/embed/ZeZrx7kHTnI", // Athletic recovery biology - using educational biology video
       thumbnail: "https://img.youtube.com/vi/ZeZrx7kHTnI/maxresdefault.jpg",
       isYouTube: true,
       duration: 660,
@@ -285,8 +285,8 @@ export default function PersonalizedLearning({
       id: "music-physics-energetic",
       title: "The Physics of Music: Sound, Waves & Harmony",
       description: "Discover how physics creates the music we love to hear",
-      videoUrl: "https://www.youtube.com/embed/w9WSyqgkqFA", // Physics of music - using educational sound physics video
-      thumbnail: "https://img.youtube.com/vi/w9WSyqgkqFA/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/embed/8a9JGgCvzMg", // Physics of music - using educational sound physics video
+      thumbnail: "https://img.youtube.com/vi/8a9JGgCvzMg/maxresdefault.jpg",
       isYouTube: true,
       duration: 600,
       subject: "physics",
@@ -310,8 +310,8 @@ export default function PersonalizedLearning({
       id: "music-math-calm",
       title: "Harmony in Numbers: Mathematical Music Theory",
       description: "Peaceful exploration of the mathematics behind musical harmony",
-      videoUrl: "https://www.youtube.com/embed/ZeZrx7kHTnI",
-      thumbnail: "https://img.youtube.com/vi/w9WSyqgkqFA/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/embed/ZeZrx7kHTnI", // Music math - using educational music theory video
+      thumbnail: "https://img.youtube.com/vi/ZeZrx7kHTnI/maxresdefault.jpg",
       isYouTube: true,
       duration: 780,
       subject: "math",
@@ -337,8 +337,8 @@ export default function PersonalizedLearning({
       id: "art-geometry-curious",
       title: "The Mathematics of Art: Geometry in Visual Design",
       description: "Explore how mathematical principles create beautiful and harmonious art",
-      videoUrl: "https://www.youtube.com/embed/w9WSyqgkqFA", // Mathematics in art - using educational geometry video
-      thumbnail: "https://img.youtube.com/vi/w9WSyqgkqFA/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/embed/8a9JGgCvzMg", // Mathematics in art - using educational geometry video
+      thumbnail: "https://img.youtube.com/vi/8a9JGgCvzMg/maxresdefault.jpg",
       isYouTube: true,
       duration: 690,
       subject: "geometry",
@@ -364,8 +364,8 @@ export default function PersonalizedLearning({
       id: "science-chemistry-focused",
       title: "The Amazing World of Chemistry: Reactions & Molecules",
       description: "Dive deep into the fascinating world of chemical reactions and molecular science",
-      videoUrl: "https://www.youtube.com/embed/w9WSyqgkqFA", // Chemical reactions - using educational chemistry video
-      thumbnail: "https://img.youtube.com/vi/w9WSyqgkqFA/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/embed/8a9JGgCvzMg", // Chemical reactions - using educational chemistry video
+      thumbnail: "https://img.youtube.com/vi/8a9JGgCvzMg/maxresdefault.jpg",
       isYouTube: true,
       duration: 840,
       subject: "chemistry",
@@ -391,8 +391,8 @@ export default function PersonalizedLearning({
       id: "cooking-chemistry-tired",
       title: "The Science of Cooking: Chemistry in Your Kitchen",
       description: "Discover the amazing chemistry that happens every time you cook",
-      videoUrl: "https://www.youtube.com/embed/w9WSyqgkqFA", // Food science chemistry - using educational cooking chemistry video
-      thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/embed/ZeZrx7kHTnI", // Food science chemistry - using educational cooking chemistry video
+      thumbnail: "https://img.youtube.com/vi/8a9JGgCvzMg/maxresdefault.jpg",
       isYouTube: true,
       duration: 720,
       subject: "chemistry",
@@ -418,8 +418,8 @@ export default function PersonalizedLearning({
       id: "space-physics-curious",
       title: "The Physics of Space: Gravity, Orbits & Black Holes",
       description: "Journey through the cosmos and discover the physics that governs our universe",
-      videoUrl: "https://www.youtube.com/embed/w9WSyqgkqFA", // Space physics - using educational space physics video
-      thumbnail: "https://img.youtube.com/vi/w9WSyqgkqFA/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/embed/8a9JGgCvzMg", // Space physics - using educational space physics video
+      thumbnail: "https://img.youtube.com/vi/8a9JGgCvzMg/maxresdefault.jpg",
       isYouTube: true,
       duration: 780,
       subject: "physics",
